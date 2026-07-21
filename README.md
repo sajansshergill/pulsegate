@@ -1,2 +1,3 @@
-# pulsegate
-Product Analytics &amp; Logging Integrity Platform
+# Pulsegate
+## Product Analytics &amp; Logging Integrity Platform
+
