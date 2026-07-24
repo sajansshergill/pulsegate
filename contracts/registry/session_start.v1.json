@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "session_start v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "event_type",
+    "event_version",
+    "occurred_at",
+    "user_id",
+    "surface",
+    "session_id",
+    "device_type",
+    "app_version"
+  ],
+  "properties": {
+    "event_id": { "type": "string" },
+    "event_type": { "const": "session_start" },
+    "event_version": { "const": 1 },
+    "occurred_at": { "type": "string", "format": "date-time" },
+    "user_id": { "type": "string" },
+    "surface": {
+      "type": "string",
+      "enum": ["feed", "reels", "stories", "messaging", "ads", "notifications"]
+    },
+    "session_id": { "type": "string" },
+    "device_type": { "type": "string", "enum": ["ios", "android", "web"] },
+    "app_version": { "type": "string" }
+  }
+}

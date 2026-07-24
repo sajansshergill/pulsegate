@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "post_create v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "event_type",
+    "event_version",
+    "occurred_at",
+    "user_id",
+    "surface",
+    "post_id",
+    "content_type",
+    "caption_length"
+  ],
+  "properties": {
+    "event_id": { "type": "string" },
+    "event_type": { "const": "post_create" },
+    "event_version": { "const": 1 },
+    "occurred_at": { "type": "string", "format": "date-time" },
+    "user_id": { "type": "string" },
+    "surface": {
+      "type": "string",
+      "enum": ["feed", "reels", "stories", "messaging", "ads", "notifications"]
+    },
+    "post_id": { "type": "string" },
+    "content_type": { "type": "string", "enum": ["photo", "video", "text"] },
+    "caption_length": { "type": "integer", "minimum": 0 }
+  }
+}

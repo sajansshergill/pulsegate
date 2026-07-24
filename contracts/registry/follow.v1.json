@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "follow v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "event_type",
+    "event_version",
+    "occurred_at",
+    "user_id",
+    "surface",
+    "followee_id"
+  ],
+  "properties": {
+    "event_id": { "type": "string" },
+    "event_type": { "const": "follow" },
+    "event_version": { "const": 1 },
+    "occurred_at": { "type": "string", "format": "date-time" },
+    "user_id": { "type": "string" },
+    "surface": {
+      "type": "string",
+      "enum": ["feed", "reels", "stories", "messaging", "ads", "notifications"]
+    },
+    "followee_id": { "type": "string" }
+  }
+}
