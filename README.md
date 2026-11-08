@@ -12,6 +12,42 @@ Built as a portfolio artifact for a **Data Engineer, Product Analytics** role. T
 design mirrors the shape of a Meta-family product-analytics problem — billions of
 events, multiple surfaces, strict privacy requirements — at a runnable local scale.
 
+![PulseGate demo](docs/demo.gif)
+
+## The console
+
+PulseGate's serving layer is an interactive quality-gate console
+(`app/dashboard.py`, Streamlit + Plotly) that runs standalone on deterministic
+demo data derived from the project's own contracts, generator and detectors:
+
+- **Live sidebar filters** — date range, event types (the 7 versioned
+  contracts), surfaces, triage severity and a minimum-volume threshold; every
+  chart, table and KPI re-renders instantly.
+- **KPI cards with deltas** — events through the gate vs. the prior
+  equal-length period, contract pass rate, dead-letter rate, open critical
+  triage records and duplicates caught.
+- **Gate overview** — bronze → silver → gold pass-rate lines against the
+  freshness / completeness / accuracy SLAs, an event-type × date volume
+  heatmap, and the dead-letter fault mix (`drop_field`, `wrong_type`,
+  `extra_field`, `bad_enum`).
+- **Animated charts** — Plotly `animation_frame` views: daily volume by
+  contract and a cumulative volume race you can play (the Nov 2–4 `like`
+  collapse on reels is visible as it happens).
+- **3D quality space** — a rotatable `Scatter3d` of every event × surface
+  slice in date × null-rate × reject-rate space, plus an event-type × date
+  **reject-rate surface terrain** (drag to orbit, scroll to zoom).
+- **Contract health** — the live registry from `contracts/registry/*.v1.json`,
+  pass rate by event type, and the null-rate monitor over `event_id`,
+  `user_id`, `surface` and `occurred_at`.
+- **Triage queue** — structured records in the `quality.triage.TriageRecord`
+  shape (fingerprint, detector, signal, severity, event type, detail,
+  suggested owner from the `OWNER_MAP`), with open records broken down by
+  owner and detector.
+- **Dark UI** — gradient hero header, glass KPI cards and a custom dark
+  theme (`.streamlit/config.toml` + inline CSS).
+
+Run it with: `streamlit run app/dashboard.py`
+
 ---
 
 ## Why this project looks different
